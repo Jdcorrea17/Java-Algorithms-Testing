@@ -7,62 +7,64 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class MissingNumber {
-
-public static int missingNumber(int[] nums, int maxNum){
-        Set<Integer> set = Arrays.stream(nums).boxed().collect(Collectors.toSet());
-
-        for(int i = 1; i <= maxNum; i += 1){
-        if(!set.contains(i)){
-        return i;
-        }
-        }
-        return 0;
-        }
-
-public static int missingNumberSort(int[] nums, int maxNum){
-        Arrays.sort(nums);
-
-        for(int i = 1; i < maxNum; i +=1){
-        if(i != nums[i -1]){
-        return i;
-        }
-        }
-        if(nums.length == maxNum && nums[maxNum -1] == maxNum){
-        return 0;
-        }
-        return maxNum;
+        public static void missingNumber(int arr[], int N){
+                int i;
+                int temp[] = new int[N + 1];
+                for(i = 0; i < N; i++){
+                        temp[arr[i] - 1] = 1;
+                }
+                int ans = 0;
+                for(i = 0; i <= N; i++){
+                        if(temp[i] == 0)
+                                ans = i +1;
+                }
+                System.out.println(ans);
         }
 
-public static int missingNumberSum(int[] nums, int maxNum){
-        int expectedSum = 0;
+        public static void main(String[] args){
+                int arr[] = {1,3,4,5,6,7,8,9,10};
+                int n = arr.length;
 
-        for(int i = 1; i <= maxNum; i += 1){
-        expectedSum += 1;
+                missingNumber(arr, n);
         }
-        int actualSum = Arrays.stream(nums).sum();
-        return expectedSum - actualSum;
-        }
+
 }
 
-//My Solution
-//public static void findMissing(int arr[], int N){
-//        int i;
-//        int temp[] = new int[N + 1];
-//        for(i = 0; i < N; i++){
-//            temp[arr[i] - 1] = 1;
-//        }
-//        int ans = 0;
-//        for(i = 0; i <= N; i++){
-//            if(temp[i] == 0)
-//                ans = i +1;
-//        }
-//        System.out.println(ans);
-//    }
+//Solution
+//public static int missingNumber(int[] nums, int maxNum){
+//        Set<Integer> set = Arrays.stream(nums).boxed().collect(Collectors.toSet());
 //
-//    public static void main(String[] args){
-//        int arr[] = {1,3,4,5,6,7,8,9,10};
-//        int n = arr.length;
+//        for(int i = 1; i <= maxNum; i += 1){
+//                if(!set.contains(i)){
+//                        return i;
+//                }
+//        }
+//        return 0;
+//}
 //
-//        findMissing(arr, n);
+//        public static int missingNumberSort(int[] nums, int maxNum){
+//                Arrays.sort(nums);
+//
+//                for(int i = 1; i < maxNum; i +=1){
+//                        if(i != nums[i -1]){
+//                                return i;
+//                        }
+//                }
+//                if(nums.length == maxNum && nums[maxNum -1] == maxNum){
+//                        return 0;
+//                }
+//                return maxNum;
+//        }
+//
+//        public static int missingNumberSum(int[] nums, int maxNum){
+//                int expectedSum = 0;
+//
+//                for(int i = 1; i <= maxNum; i += 1){
+//                        expectedSum += 1;
+//                }
+//                int actualSum = Arrays.stream(nums).sum();
+//                return expectedSum - actualSum;
+//        }
 //    }
+
 // My solution is a lot different from the answer in the 30 minutes I look at how to come up with a solution still not that great with time complexity. But my solution was able to show with number was missing from 1-10 but when I add the missing number and rerun the program it said the missing number was 11. Seeing the solution help better understand the different things needed for the program to run correctly and is insightful.
